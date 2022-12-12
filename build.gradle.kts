@@ -20,6 +20,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	// 2022.12.12[프뚜]: 소스코드 자동 리로딩
+	implementation("org.springframework.boot:spring-boot-devtools:2.7.6")
 }
 
 tasks.withType<KotlinCompile> {

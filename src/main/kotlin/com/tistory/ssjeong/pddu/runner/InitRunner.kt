@@ -1,5 +1,6 @@
 package com.tistory.ssjeong.pddu.runner
 
+import com.tistory.ssjeong.pddu.entity.UserEntity
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.context.annotation.Configuration
@@ -8,22 +9,107 @@ import org.springframework.context.annotation.Configuration
 class InitRunner : ApplicationRunner {
 
     override fun run(args: ApplicationArguments?) {
-        // 2022.12.07[프뚜]: null 허용 변수 선언하기
-        val member: String? = "프뚜"
+        // newInstance()
 
-        // 2022.12.07[프뚜]: null 체크하기
-        if (member !== null) {
-            member.length
+        // letFunc()
+
+        // runFunc()
+
+        // withFunc()
+
+        // alsoFunc()
+
+        applyFunc()
+    }
+
+    private fun newInstance() {
+        // 2022.12.[프뚜]:
+        val user = UserEntity("프뚜", 20)
+        println(user)
+
+        user.incrementAge()
+        user.setName("먹뚜")
+        println(user)
+    }
+
+    private fun letFunc() {
+        // 2022.12.12[프뚜]: it, lambda
+        var user = UserEntity("프뚜", 20).let {
+            println("[LOG]: ${it}")
+
+            it.incrementAge()
+            it.setName("먹뚜")
+            println("[LOG]: ${it}")
         }
 
-        // 2022.12.07[프뚜]: null일 땐 null로 return
-        member?.length
+        println("[LOG]: ${user.javaClass}")
+    }
 
-        // 2022.12.07[프뚜]: null일 땐 default value return
-        member?.length ?: 10
+    private fun runFunc() {
+        // 2022.12.12[프뚜]: this, lambda
+        var user = UserEntity("프뚜", 20).run {
+            println("[LOG]: $this")
 
-        // 2022.12.07[프뚜]: NPE 발생할 수 있지만, 체크 없이 사용가능
-        member!!.length
+            incrementAge()
+            setName("먹뚜")
+
+            println("[LOG]: $this")
+        }
+
+        println("[LOG]: ${user.javaClass}")
+    }
+
+    private fun withFunc() {
+        // 2022.12.12[프뚜]: this, lambda
+        val users: List<UserEntity> = listOf(
+            UserEntity("프뚜", 20), UserEntity("먹뚜", 21)
+        )
+
+        val totalAge = with(users) {
+            var age: Int = 0
+            for (user in this) {
+                age += user.getAge()
+            }
+
+            age
+        }
+
+        println("[LOG]: ${totalAge}")
+    }
+
+    private fun alsoFunc() {
+        // 2022.12.12[프뚜]: it, context
+        val user = UserEntity("프뚜", 20)
+            .also {
+                println("[LOG]: $it")
+            }
+            .also {
+                it.incrementAge()
+            }
+            .also {
+                it.setName("먹뚜")
+            }
+            .also {
+                println("[LOG]: $it")
+            }
+
+        println("[LOG]: ${user.javaClass}")
+    }
+
+    private fun applyFunc() {
+        // 2022.12.12[프뚜]: this, context
+        val user = UserEntity("프뚜", 20)
+            .apply {
+                println("[LOG]: $this")
+
+                incrementAge()
+                setName("먹뚜")
+            }
+            .apply {
+                println("[LOG]: $this")
+            }
+
+        println("[LOG]: ${user.javaClass}")
     }
 
 }
