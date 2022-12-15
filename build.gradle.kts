@@ -19,10 +19,14 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.springframework.boot:spring-boot-devtools:2.7.6")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	// 2022.12.12[프뚜]: 소스코드 자동 리로딩
-	implementation("org.springframework.boot:spring-boot-devtools:2.7.6")
+	// 2022.12.12[프뚜]: Retrofit 라이브러리
+	implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+	// 2022.12.12[프뚜]: Gson 변환기 라이브러리
+	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 }
 
 tasks.withType<KotlinCompile> {
