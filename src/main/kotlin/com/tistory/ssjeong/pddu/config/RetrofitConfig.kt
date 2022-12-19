@@ -7,7 +7,7 @@ object RetrofitConfig {
 
     // 2022.12.15[프뚜]: baseUrl > path
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://jsonplaceholder.typicode.com/")
+        .baseUrl("https://api.upbit.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
